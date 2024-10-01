@@ -1,0 +1,28 @@
+label {
+    float: left;
+    width: 150px;
+}
+
+#container {
+    width: 700px;
+    margin: auto;
+    background-color: beige;
+}
+
+main {
+    padding: 50px;
+}
+
+.error-message {
+    color: red;
+    font-size: 12px;
+}
+
+.hidden {
+    display: none;
+}
+
+.ml-text {
+    font-size: 12px;
+    color: blue;
+}

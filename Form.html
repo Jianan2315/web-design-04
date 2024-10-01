@@ -1,76 +1,89 @@
 <!doctype html>
 <html lang="en">
- <head>
-  <title>Feedback</title>
-  <style>
-    label {	float: left;
-			width: 150px;}
-      #container{
-          width: 700px;
-          margin: auto;
-          background-color: beige;
-      } 
-      main{
-          padding: 50px;
-      }
-  </style>
- </head>
- <body>
- <div id="container">
-	 
-	 <main>
-	 <h2>Feeback</h2>
-	 <h3>Love something? Hate something? Let us know!</h3>
-		 Note : Fields marked with an asterisk(*) are mandatory
-		 <br><br>
-		 <form method="post" novalidate>
-			<label>Title*:</label>
-			<input type="radio" name="title" id="miss" value="miss" required="required"/>Miss
-			<input type="radio" name="title" id="mr" value="mr" required="required"/>Mr.
-			<input type="radio" name="title" id="mrs" value="mrs" required="required"/>Mrs.
-			<br><br>
-			<label for="firstName">First Name*:</label>
-			<input type="text" name="firstName" id="firstName" placeholder="First Name" />	
-			<br><br>
-			
 
-			<label for="lastName">Last Name*:</label>
-			<input type="text" name="lastName" id="lastName" placeholder="Last Name" />
-			<br><br>
-			
+<head>
+  <title>Feedback for dining on campus</title>
+  <link rel="stylesheet" type="text/css" href="style.css">
+</head>
 
-			<label for="emailId">Email Id*:</label>
-			<input type="text" name="emailId" id="emailId" placeholder="yourname@domain.com" />
-			<br><br>
-			
+<body>
+  <div id="container">
+    <main>
+      <h2>Feedback</h2>
+      <h3>Love something? Hate something? Let us know!</h3>
+      <p>Note: Fields marked with an asterisk(*) are mandatory</p>
+      <br><br>
+      <form id="feedbackForm" method="post" novalidate>
+        <!-- Street Address Fields -->
+        <label for="street1">Street Address 1*:</label>
+        <input type="text" name="street1" id="street1" placeholder="Street Address 1" required/>
+        <div id="street1-error" class="error-message hidden">Please enter a valid street address.</div>
+        <br><br>
 
-			<label for="phoneNumber">Phone Number*:</label>
-			<input type="text" name="phoneNumber" id="phoneNumber" placeholder="xxx-xxx-xxxx" />
-			<br><br>
-			
-            <label for="zipcode">ZipCode*:</label>
-			<input type="text" name="zipcode" id="zipcode" placeholder="xxxxxx" />
-			<br><br>
-             
-            <label for="zipcode">How did you hear*:</label>
-			<input type='checkbox' name="source" value="facebook" /> Facebook
-            <input type='checkbox' name="source" value="google" /> Google
-            <input type='checkbox' name="source" value="yelp" /> Yelp 
-			<br><br> 
-             
-			<label for="comments">Comments*:</label>
-			<textarea name="text" id="comments" placeholder="Your comments" rows="5" cols="25"></textarea>
-			<br><br>
-			<input type="Submit">
-			<input type="Reset">
-			<br><br>
-		 </form>
-	 </main>
- </div>
+        <label for="street2">Street Address 2 (optional):</label>
+        <input type="text" name="street2" id="street2" placeholder="Street Address 2"/>
+        <br><br>
 
- <script>
- 
- </script>
+        <!-- First Name and Last Name -->
+        <label for="firstName">First Name*:</label>
+        <input type="text" name="firstName" id="firstName" placeholder="First Name" required/>
+        <div id="firstName-error" class="error-message hidden">Please enter a valid name (alphabetic characters only).</div>
+        <br><br>
 
- </body>
+        <label for="lastName">Last Name*:</label>
+        <input type="text" name="lastName" id="lastName" placeholder="Last Name" required/>
+        <div id="lastName-error" class="error-message hidden">Please enter a valid name (alphabetic characters only).</div>
+        <br><br>
+
+        <!-- Email Address -->
+        <label for="emailId">Email Id*:</label>
+        <input type="text" name="emailId" id="emailId" placeholder="yourname@northeastern.edu" required/>
+        <div id="emailId-error" class="error-message hidden">Please enter a valid Northeastern email ending with "@northeastern.edu".</div>
+        <br><br>
+
+        <!-- Phone Number -->
+        <label for="phoneNumber">Phone Number*:</label>
+        <input type="text" name="phoneNumber" id="phoneNumber" placeholder="10 digits" required/>
+        <div id="phoneNumber-error" class="error-message hidden">Please enter a valid 10-digit phone number.</div>
+        <br><br>
+
+        <!-- Zip Code -->
+        <label for="zipcode">Zip Code*:</label>
+        <input type="text" name="zipcode" id="zipcode" placeholder="5 digits" required/>
+        <div id="zipcode-error" class="error-message hidden">Please enter a valid 5-digit zip code.</div>
+        <br><br>
+
+        <!-- Drink Selection with Medium and Large Options -->
+        <label for="favouriteDrink">Choose your favourite drink*:</label>
+        <select id="favouriteDrink" name="favouriteDrink" onchange="displayCupOptions()" required>
+          <option value="">--Select a drink--</option>
+          <option value="Coke">Coke</option>
+          <option value="Pepsi">Pepsi</option>
+          <option value="Sprite">Sprite</option>
+          <option value="Fanta">Fanta</option>
+          <option value="Water">Water</option>
+        </select>
+        <div id="drink-options" class="hidden">
+          <label>Select cup size:</label>
+          <br>
+          <input type="radio" name="cupSize" value="Medium" id="mediumCup" onclick="displayML('medium')" required> Medium <span id="medium-ml" class="ml-text hidden">550 ml</span>
+          <br>
+          <input type="radio" name="cupSize" value="Large" id="largeCup" onclick="displayML('large')" required> Large <span id="large-ml" class="ml-text hidden">750 ml</span>
+        </div>
+        <div id="drink-error" class="error-message hidden">Please select a drink and one cup size.</div>
+        <br><br>
+
+        <input type="submit" id="submitBtn" disabled>
+        <input type="reset" id="resetBtn">
+      </form>
+
+      <div id="submittedData" class="hidden">
+        <h3>Submitted Data:</h3>
+        <table id="dataTable"></table>
+      </div>
+    </main>
+  </div>
+  <script src="script.js"></script>
+</body>
+
 </html>
