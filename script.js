@@ -21,17 +21,17 @@ function displayCupOptions() {
     validateDrink();
 }
 
-function displayML(size) {
-    const mediumML = document.getElementById('medium-ml');
-    const largeML = document.getElementById('large-ml');
-    if (size === 'medium') {
-        mediumML.classList.remove('hidden');
-        largeML.classList.add('hidden');
-    } else if (size === 'large') {
-        largeML.classList.remove('hidden');
-        mediumML.classList.add('hidden');
+
+inputs.forEach(input => {
+    validateBlank(input);
+});
+// Function to add first-time visit signal
+function validateBlank(input){
+    const value = input.value.trim();
+    const errorMessage = document.getElementById(`${input.id}-error`);
+    if (value.length === 0 && errorMessage !== null) {
+        errorMessage.classList.add('first');
     }
-    validateDrink();
 }
 
 // Function to validate each input field
@@ -60,6 +60,7 @@ function validateField(event) {
 
     if (isValid) {
         errorMessage.classList.add('hidden');
+        errorMessage.classList.remove('first');
     } else {
         errorMessage.classList.remove('hidden');
     }
@@ -67,28 +68,17 @@ function validateField(event) {
     toggleSubmitButton();
 }
 
-function validateDrink() {
-    const selectedDrink = drinkSelect.value;
-    const selectedSize = document.querySelector('input[name="cupSize"]:checked');
-    let isValid = true;
 
-    if (!selectedDrink || !selectedSize) {
-        drinkError.classList.remove('hidden');
-        isValid = false;
-    } else {
-        drinkError.classList.add('hidden');
-    }
-
-    toggleSubmitButton();
-}
 
 function toggleSubmitButton() {
     let allValid = true;
 
     inputs.forEach(input => {
         const errorMessage = document.getElementById(`${input.id}-error`);
-        if (errorMessage && !errorMessage.classList.contains('hidden')) {
-            allValid = false;
+        if (errorMessage){
+            if (errorMessage.classList.contains('first') || !errorMessage.classList.contains('hidden')) {
+                allValid = false;
+            }
         }
     });
 
@@ -115,18 +105,17 @@ function displaySubmittedData() {
     const dataTable = document.getElementById('dataTable');
     dataTable.innerHTML = '';
 
-    // Add street addresses
-    addRowToTable('Street Address 1', form.street1.value);
-    addRowToTable('Street Address 2', form.street2.value);
-
     // Add first name, last name
     addRowToTable('First Name', form.firstName.value);
     addRowToTable('Last Name', form.lastName.value);
 
-    // Add email, phone number, zip code
+    // Add email, phone number, address, zip code
     addRowToTable('Email', form.emailId.value);
     addRowToTable('Phone Number', form.phoneNumber.value);
+    addRowToTable('Street Address 1', form.street1.value);
+    addRowToTable('Street Address 2', form.street2.value);
     addRowToTable('Zip Code', form.zipcode.value);
+
 
     // Add selected drink and cup sizes
     const selectedDrink = drinkSelect.value;
@@ -143,4 +132,40 @@ function addRowToTable(fieldName, fieldValue) {
     row.appendChild(cell1);
     row.appendChild(cell2);
     document.getElementById('dataTable').appendChild(row);
+}
+
+function toggleML(size) {
+    const mediumML = document.getElementById('medium-ml');
+    const largeML = document.getElementById('large-ml');
+    const mediumCup = document.getElementById('mediumCup');
+    const largeCup = document.getElementById('largeCup');
+
+    if (size === 'medium') {
+        if (mediumCup.checked) {
+            mediumML.classList.remove('hidden');
+        } else {
+            mediumML.classList.add('hidden');
+        }
+    } else if (size === 'large') {
+        if (largeCup.checked) {
+            largeML.classList.remove('hidden');
+        } else {
+            largeML.classList.add('hidden');
+        }
+    }
+
+    validateDrink();
+}
+
+function validateDrink() {
+    const selectedDrink = drinkSelect.value;
+    const mediumCup = document.getElementById('mediumCup').checked;
+    const largeCup = document.getElementById('largeCup').checked;
+
+    if (!selectedDrink || (!mediumCup && !largeCup)) {
+        drinkError.classList.remove('hidden');
+    } else {
+        drinkError.classList.add('hidden');
+    }
+    toggleSubmitButton();
 }

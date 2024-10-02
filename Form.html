@@ -9,21 +9,11 @@
 <body>
   <div id="container">
     <main>
-      <h2>Feedback</h2>
+      <h2>Feedback for dining on campus</h2>
       <h3>Love something? Hate something? Let us know!</h3>
       <p>Note: Fields marked with an asterisk(*) are mandatory</p>
       <br><br>
       <form id="feedbackForm" method="post" novalidate>
-        <!-- Street Address Fields -->
-        <label for="street1">Street Address 1*:</label>
-        <input type="text" name="street1" id="street1" placeholder="Street Address 1" required/>
-        <div id="street1-error" class="error-message hidden">Please enter a valid street address.</div>
-        <br><br>
-
-        <label for="street2">Street Address 2 (optional):</label>
-        <input type="text" name="street2" id="street2" placeholder="Street Address 2"/>
-        <br><br>
-
         <!-- First Name and Last Name -->
         <label for="firstName">First Name*:</label>
         <input type="text" name="firstName" id="firstName" placeholder="First Name" required/>
@@ -47,6 +37,16 @@
         <div id="phoneNumber-error" class="error-message hidden">Please enter a valid 10-digit phone number.</div>
         <br><br>
 
+        <!-- Street Address Fields -->
+        <label for="street1">Street Address 1*:</label>
+        <input type="text" name="street1" id="street1" placeholder="Street Address 1" required/>
+        <div id="street1-error" class="error-message hidden">Please enter a valid street address.</div>
+        <br><br>
+
+        <label for="street2">Street Address 2 (optional):</label>
+        <input type="text" name="street2" id="street2" placeholder="Street Address 2"/>
+        <br><br>
+
         <!-- Zip Code -->
         <label for="zipcode">Zip Code*:</label>
         <input type="text" name="zipcode" id="zipcode" placeholder="5 digits" required/>
@@ -64,11 +64,11 @@
           <option value="Water">Water</option>
         </select>
         <div id="drink-options" class="hidden">
-          <label>Select cup size:</label>
+          <label>Select cup size(s):</label>
           <br>
-          <input type="radio" name="cupSize" value="Medium" id="mediumCup" onclick="displayML('medium')" required> Medium <span id="medium-ml" class="ml-text hidden">550 ml</span>
+          <input type="checkbox" name="cupSize" value="Medium" id="mediumCup" onclick="toggleML('medium')"> Medium <span id="medium-ml" class="ml-text hidden">550 ml</span>
           <br>
-          <input type="radio" name="cupSize" value="Large" id="largeCup" onclick="displayML('large')" required> Large <span id="large-ml" class="ml-text hidden">750 ml</span>
+          <input type="checkbox" name="cupSize" value="Large" id="largeCup" onclick="toggleML('large')"> Large <span id="large-ml" class="ml-text hidden">750 ml</span>
         </div>
         <div id="drink-error" class="error-message hidden">Please select a drink and one cup size.</div>
         <br><br>

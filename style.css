@@ -26,3 +26,18 @@ main {
     font-size: 12px;
     color: blue;
 }
+
+.first{
+    color: #d13432;
+}
+
+#dataTable {
+    border-collapse: collapse;
+}
+#dataTable tr {
+    border: 3px solid #afa9a9;
+}
+#dataTable td {
+    border: 2px solid #ece9e9;
+    padding: 1px 8px;
+}
